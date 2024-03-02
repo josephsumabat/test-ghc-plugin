@@ -1,0 +1,59 @@
+spec-version: 0.30.0
+name: test-plugin
+author: Joseph Sumabat
+synopsis: See README on Github for more information 
+description: A personal template for haskell projects
+category: Development
+maintainer: josephrsumabat@gmail.com
+github: josephsumabat/test-plugin
+license: MIT
+version: 0.1.0
+build-type: Simple
+extra-source-files:
+  - CHANGELOG.md
+  - README.md
+
+dependencies:
+  - base
+  - ghc
+
+default-extensions:
+- FlexibleContexts
+- OverloadedRecordDot
+- OverloadedStrings
+- NoFieldSelectors
+- LambdaCase
+
+ghc-options:
+  - -Wall
+
+library:
+  source-dirs: src
+  ghc-options:
+  - -fwrite-ide-info
+  - -hiedir test/TestData/.hiefiles
+
+tests:
+  test-plugin-test:
+    dependencies:
+    - test-plugin
+    defaults: hspec/hspec@main
+    ghc-options:
+      - -fwrite-ide-info
+      - -hiedir test/TestData/.hiefiles
+
+flags:
+  dev:
+    description: Defer type errors for development
+    manual: true
+    default: false
+
+when:
+  - condition: flag(dev)
+    ghc-options:
+    - -fwrite-ide-info
+    - -hiedir .hiefiles
+    - -fdefer-type-errors
+    - -fno-defer-typed-holes
+    - -Werror=deferred-type-errors
+    - -Werror=deferred-out-of-scope-variables
