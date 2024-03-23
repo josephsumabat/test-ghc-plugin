@@ -46,7 +46,10 @@ library
   ghc-options: -Wall -fwrite-ide-info -hiedir test/TestData/.hiefiles
   build-depends:
       base
+    , directory
     , ghc
+    , hiedb >=0.6.0.0
+    , stm
   default-language: Haskell2010
   if flag(dev)
     ghc-options: -fwrite-ide-info -hiedir .hiefiles -fdefer-type-errors -fno-defer-typed-holes -Werror=deferred-type-errors -Werror=deferred-out-of-scope-variables
@@ -55,7 +58,6 @@ test-suite test-plugin-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
-      Main
       Paths_test_plugin
   hs-source-dirs:
       test
@@ -68,8 +70,11 @@ test-suite test-plugin-test
   ghc-options: -Wall -fwrite-ide-info -hiedir test/TestData/.hiefiles
   build-depends:
       base
+    , directory
     , ghc
+    , hiedb >=0.6.0.0
     , hspec ==2.*
+    , stm
     , test-plugin
   default-language: Haskell2010
   if flag(dev)

@@ -15,7 +15,10 @@ extra-source-files:
 
 dependencies:
   - base
+  - directory
   - ghc
+  - hiedb >= 0.6.0.0
+  - stm
 
 default-extensions:
 - FlexibleContexts
